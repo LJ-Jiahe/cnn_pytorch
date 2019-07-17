@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-#### Software
+**Software**
 
 What's been listed below are the software I used specifically in this project. You may use other compatible software preferred.  
 Related installation and deployment instrunction will not be included in next section. Please see official websites provided below for related tutorial.
@@ -17,7 +17,7 @@ Related installation and deployment instrunction will not be included in next se
 
 ```
 
-#### Python packages
+**Python packages**
 (also listed in [requirements.txt](requirements.txt) file)
 
 ```
