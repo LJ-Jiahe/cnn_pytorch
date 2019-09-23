@@ -1,7 +1,8 @@
 import os
 
 from torch.utils.data import Dataset
-From PIL import Image
+from PIL import Image
+
 
 class ImageDataset(Dataset):
     def __init__(self, data_dir, input_dir, target_dir, transform=None):
@@ -13,7 +14,7 @@ class ImageDataset(Dataset):
         self.input_contents = os.listdir(os.path.join(data_dir, input_dir))
         self.target_contents = os.listdir(os.path.join(data_dir, target_dir))
 
-        self.input_contest.sort(key=lambda x: int(x.split('.')[0]))
+        self.input_contents.sort(key=lambda x: int(x.split('.')[0]))
         self.target_contents.sort(key=lambda x: int(x.split('.')[0]))
 
     def __len__(self):
@@ -22,7 +23,7 @@ class ImageDataset(Dataset):
     def __getitem__(self, idx):
         input_image = Image.open(os.path.join(self.data_dir,
                                               self.input_dir,
-                                              self.input_contest[idx]))
+                                              self.input_contents[idx]))
         target_image = Image.open(os.path.join(self.data_dir,
                                                self.target_dir,
                                                self.target_contents[idx]))

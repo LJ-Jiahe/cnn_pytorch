@@ -3,7 +3,7 @@
 import torch
 from torch.utils.data import dataloader
 
-from classes import ImageDataset
+from utils import ImageDataset
 import config as cfg
 
 
