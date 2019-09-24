@@ -30,4 +30,4 @@ validation_dataloader = DataLoader(dataset=validation_dataset,
 if cfg.recov_from_ckpt:
     [model, saved_epoch] = recov_from_ckpt(cfg.ckpt_dir)
 else:
-    model = 
+    pass

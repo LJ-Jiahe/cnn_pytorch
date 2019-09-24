@@ -12,7 +12,7 @@ def recov_from_ckpt(ckpt_dir):
 
 
 
-
+    '''
     if os.path.exists(ckpt_dir):
         data_list = os.listdir(ckpt_dir)
         extension = '.pt'
@@ -31,7 +31,8 @@ def recov_from_ckpt(ckpt_dir):
             print("No checkpoints available")
     else:
         print("Can't find checkpoints directory")
-
+    '''
+    pass
 
 def append_to_pickle_file(path, item):
     with open(path, 'ab') as file:

@@ -17,7 +17,7 @@ training_shuffle = False
 validation_batch_size = 1
 validation_shuffle = False
 
-hyper_params =
+
 
 recov_from_ckpt = False
 
