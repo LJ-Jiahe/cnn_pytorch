@@ -32,3 +32,10 @@ class ImageDataset(Dataset):
                 'target_image': self.transform(target_image)}
 
         return item
+
+
+class Classification_Dataset(Dataset)
+    def __init__(self, data_dir, input_dir, target_dir, transform=None):
+        
+    
+    def __getitem__(self):

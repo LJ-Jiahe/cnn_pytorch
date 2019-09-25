@@ -1,9 +1,10 @@
 
 
-import torch
 from torch.utils.data import DataLoader
+from torch import nn
+import torch
 
-from utils import ImageDataset, recov_from_ckpt
+from utils import ImageDataset, recov_from_ckpt, CNN_Dynamic
 import config as cfg
 
 
@@ -30,4 +31,21 @@ validation_dataloader = DataLoader(dataset=validation_dataset,
 if cfg.recov_from_ckpt:
     [model, saved_epoch] = recov_from_ckpt(cfg.ckpt_dir)
 else:
-    pass
+    model = CNN_Dynamic(channel_num=cfg.channel_num, 
+                        kernel_sizes=cfg.kernel_sizes, 
+                        strides=cfg.strides, 
+                        paddings=cfg.paddings, 
+                        ac_funs=cfg.ac_funs, 
+                        img_size=cfg.img_size, 
+                        fc_sizes=cfg.fc_sizes, 
+                        fc_ac_funs=cfg.fc_ac_funs)
+    saved_epoch = 0
+
+if torch.cuda.is_available():
+    print("\nCuda available\n")
+    model.cuda()
+
+
+# Start training
+for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
+    

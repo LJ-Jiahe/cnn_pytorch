@@ -1,3 +1,3 @@
-from .image_dataset import *
+from .datasets import *
 from .functions import *
-from .network import *
+from .networks import *

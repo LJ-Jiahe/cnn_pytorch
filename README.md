@@ -1,6 +1,6 @@
-# Project Title
+# CNN_PyTorch
 
-One Paragraph of project description goes here
+A general, highly tunable, dynamically generated CNN model.
 
 ## Getting Started
 
@@ -14,7 +14,8 @@ What's been listed below are the software I used specifically in this project. Y
 Related installation and deployment instrunction will not be included in next section. Please see official websites provided below for related tutorial.
 
 ```
-
+miniconda
+python
 ```
 
 **Python packages**
@@ -32,7 +33,7 @@ in your terminal, and all packages should be properly installed
 
 If you use conda, below are all the commands needed:  
 ```
-Give the example
+
 ```
 
 ## Running the tests
@@ -59,15 +60,7 @@ Give an example
 
 * **Li, Jiahe (LJ)** - *Initial work* - [GitHub-LJ](https://github.com/LJ-LiJiahe)
 
-See also the list of [contributors](https://github.com/LJ-LiJiahe/Template/contributors) who participated in this project.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
