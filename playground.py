@@ -1,18 +1,43 @@
 
+import torch
+import torchvision
+import torchvision.transforms as transforms
+import matplotlib.pyplot as plt
+import numpy as np
 
-import config as cfg
-from utils import ImageDataset, CNN_Dynamic
-from torch import nn
 
-channel_num = [3, 16, 64, 128]
-kernel_sizes = [3, 3, 3]
-strides = [1, 1, 1]
-paddings = [1, 1, 1]
-ac_funs = [nn.ReLU, nn.ReLU, nn.ReLU]
-img_size = 28
-fc_sizes = [channel_num[-1] * img_size * img_size, 1024, 10]
-fc_ac_funs = [nn.Sigmoid, None]
+transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-model = CNN_Dynamic(
-    channel_num, kernel_sizes, strides, paddings, ac_funs, img_size, fc_sizes, fc_ac_funs)
-print(model)
+trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+                                        transform=transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
+                                          shuffle=True, num_workers=2)
+
+validationset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                       transform=transform)
+validationloader = torch.utils.data.DataLoader(validationset, batch_size=4,
+                                         shuffle=False, num_workers=2)
+
+classes = ('plane', 'car', 'bird', 'cat',
+           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+# functions to show an image
+
+
+def imshow(img):
+    img = img / 2 + 0.5     # unnormalize
+    npimg = img.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.show()
+
+
+# get some random training images
+dataiter = iter(trainloader)
+images, labels = dataiter.next()
+
+# show images
+imshow(torchvision.utils.make_grid(images))
+# print labels
+print(' '.join('%5s' % classes[labels[j]] for j in range(4)))

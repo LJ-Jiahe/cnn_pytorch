@@ -9,7 +9,8 @@ training_target_dir = ""
 validation_input_dir = ""
 validation_target_dir = ""
 
-ckpt_dir="checkpoints/"
+ckpt_dir = "checkpoints/"
+loss_folder = "loss/"
 
 
 # Data parameters
@@ -28,7 +29,7 @@ kernel_sizes = [3, 3, 3]
 strides = [1, 1, 1]
 paddings = [1, 1, 1]
 ac_funs = [nn.ReLU, nn.ReLU, nn.ReLU]
-img_size = 28
+img_size = 32
 fc_sizes = [channel_num[-1] * img_size**2, 1024, 10]
 fc_ac_funs = [nn.ReLU, None]
 
@@ -36,3 +37,6 @@ fc_ac_funs = [nn.ReLU, None]
 
 
 training_epoch = 1000
+
+criterion = nn.MSELoss()
+lr = 0.01
