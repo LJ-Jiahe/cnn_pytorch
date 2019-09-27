@@ -15,15 +15,21 @@ transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-train_set = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                        transform=transform)
-train_loader = torch.utils.data.DataLoader(train_set, batch_size=1,
-                                          shuffle=True, num_workers=2)
+train_set = torchvision.datasets.CIFAR10(root=cfg.data_dir, 
+                                         train=True,
+                                         transform=transform)
+train_loader = torch.utils.data.DataLoader(train_set,
+                                           batch_size=cfg.training_batch_size,
+                                           shuffle=True, 
+                                           num_workers=2)
 
-validation_set = torchvision.datasets.CIFAR10(root='./data', train=False,
-                                       transform=transform)
-validation_loader = torch.utils.data.DataLoader(validation_set, batch_size=1,
-                                         shuffle=False, num_workers=2)
+validation_set = torchvision.datasets.CIFAR10(root='./data', 
+                                              train=False,
+                                              transform=transform)
+validation_loader = torch.utils.data.DataLoader(validation_set, 
+                                                batch_size=100,
+                                                shuffle=False, 
+                                                num_workers=2)
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
