@@ -1,5 +1,6 @@
 
-from torch import nn
+from torch import nn, optim
+from torchvision import transforms
 
 
 # Directories
@@ -14,12 +15,15 @@ loss_folder = "loss/"
 
 
 # Data parameters
-transform=None
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
 training_batch_size = 50
 training_shuffle = False
 validation_batch_size = 1
 validation_shuffle = False
+num_workers = 2
 
 # Model parameters
 recov_from_ckpt = False
@@ -39,4 +43,5 @@ fc_ac_funs = [nn.ReLU, None]
 training_epoch = 1000
 
 criterion = nn.MSELoss()
-lr = 0.01
+lr = 0.001
+optimazation = optim.Adam(_, lr=lr)

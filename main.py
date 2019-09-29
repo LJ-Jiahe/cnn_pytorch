@@ -47,5 +47,5 @@ if torch.cuda.is_available():
 
 
 # Start training
-for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
+# for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
     

@@ -2,8 +2,10 @@ import os
 import time
 
 import torch
+from torch.utils.data import DataLoader
 import torchvision
 from torchvision import transforms
+from torchvision.datasets import CIFAR10
 from tqdm import tqdm
 
 from utils import recov_from_ckpt, CNN_Dynamic, read_from_pickle_file, append_to_pickle_file
@@ -11,25 +13,21 @@ import config as cfg
 
 
 # Initialize dataset & dataloader
-transform = transforms.Compose(
-    [transforms.ToTensor(),
-     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+train_set = CIFAR10(root=cfg.data_dir, 
+                    train=True,
+                    transform=cfg.transform)
+train_loader = DataLoader(dataset=train_set,
+                          batch_size=cfg.training_batch_size,
+                          shuffle=cfg.training_shuffle, 
+                          num_workers=cfg.num_workers)
 
-train_set = torchvision.datasets.CIFAR10(root=cfg.data_dir, 
-                                         train=True,
-                                         transform=transform)
-train_loader = torch.utils.data.DataLoader(train_set,
-                                           batch_size=cfg.training_batch_size,
-                                           shuffle=True, 
-                                           num_workers=2)
-
-validation_set = torchvision.datasets.CIFAR10(root='./data', 
-                                              train=False,
-                                              transform=transform)
-validation_loader = torch.utils.data.DataLoader(validation_set, 
-                                                batch_size=100,
-                                                shuffle=False, 
-                                                num_workers=2)
+validation_set = CIFAR10(root=cfg.data_dir, 
+                        train=False,
+                        transform=cfg.transform)
+validation_loader = DataLoader(dataset=validation_set, 
+                               batch_size=cfg.validation_batch_size,
+                               shuffle=cfg.validation_shuffle, 
+                               num_workers=cfg.num_workers)
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
@@ -53,7 +51,7 @@ if torch.cuda.is_available():
 
 # Other parameters
 criterion = cfg.criterion
-optimizer = torch.optim.Adam(model.parameters(), lr=cfg.lr)
+optimizer = cfg.optimizer(model.parameters(), lr=lr)
 
 # Start training
 
