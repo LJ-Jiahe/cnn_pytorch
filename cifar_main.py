@@ -2,6 +2,7 @@ import os
 import time
 
 import torch
+from torch import optim
 from torch.utils.data import DataLoader
 import torchvision
 from torchvision import transforms
@@ -15,7 +16,8 @@ import config as cfg
 # Initialize dataset & dataloader
 train_set = CIFAR10(root=cfg.data_dir, 
                     train=True,
-                    transform=cfg.transform)
+                    transform=cfg.transform,
+                    target_transform=cfg.target_transform)
 train_loader = DataLoader(dataset=train_set,
                           batch_size=cfg.training_batch_size,
                           shuffle=cfg.training_shuffle, 
@@ -23,7 +25,8 @@ train_loader = DataLoader(dataset=train_set,
 
 validation_set = CIFAR10(root=cfg.data_dir, 
                         train=False,
-                        transform=cfg.transform)
+                        transform=cfg.transform,
+                        target_transform=cfg.target_transform)
 validation_loader = DataLoader(dataset=validation_set, 
                                batch_size=cfg.validation_batch_size,
                                shuffle=cfg.validation_shuffle, 
@@ -51,7 +54,7 @@ if torch.cuda.is_available():
 
 # Other parameters
 criterion = cfg.criterion
-optimizer = cfg.optimizer(model.parameters(), lr=lr)
+optimizer = optim.Adam(model.parameters(), lr=cfg.lr)
 
 # Start training
 

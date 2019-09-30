@@ -1,4 +1,5 @@
 
+import torch
 from torch import nn, optim
 from torchvision import transforms
 
@@ -19,9 +20,19 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-training_batch_size = 50
+class One_Hot(object):
+    def __init__(self, num_classes):
+        self.labels = torch.arange(num_classes).reshape(num_classes, 1)                      
+        self.one_hot_target = (self.labels == torch.arange(num_classes).reshape(1, num_classes)).float()
+
+    def __call__(self, tensor):
+        return(self.one_hot_target[tensor])
+    
+target_transform = transforms.Compose([One_Hot(10)])  
+
+training_batch_size = 100
 training_shuffle = False
-validation_batch_size = 1
+validation_batch_size = 10000 
 validation_shuffle = False
 num_workers = 2
 
@@ -44,4 +55,3 @@ training_epoch = 1000
 
 criterion = nn.MSELoss()
 lr = 0.001
-optimazation = optim.Adam(_, lr=lr)
