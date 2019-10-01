@@ -19,11 +19,12 @@ loss_folder = "loss/"
 transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
+num_classes = 10
 class One_Hot(object):
     def __init__(self, num_classes):
         self.labels = torch.arange(num_classes).reshape(num_classes, 1)                      
-        self.one_hot_target = (self.labels == torch.arange(num_classes).reshape(1, num_classes)).float()
+        self.one_hot_target = \
+            (self.labels == torch.arange(num_classes).reshape(1, num_classes)).float()
 
     def __call__(self, tensor):
         return(self.one_hot_target[tensor])
@@ -34,6 +35,8 @@ training_batch_size = 100
 training_shuffle = False
 validation_batch_size = 10000 
 validation_shuffle = False
+test_batch_size = 1
+test_shuffle = False
 num_workers = 2
 
 # Model parameters

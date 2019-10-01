@@ -110,8 +110,8 @@ for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
     print('\nEpoch: {} \nLoss avg: {} \nValidation Loss avg: {} \nTime(mins) {}'.format(
          epoch, train_loss_avg, validation_loss_avg, time_since_start))
 
-# Save every 10 epochs
-    if epoch % 100 == 0:
+# Save every 1 epochs
+    if epoch % 1 == 0:
         ckpt_folder = os.path.join(cfg.ckpt_dir, 'model_epoch_' + str(epoch) + '.pt')
         torch.save(model, ckpt_folder)
         print("\nmodel saved at epoch : " + str(epoch) + "\n")
