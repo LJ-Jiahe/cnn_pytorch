@@ -79,7 +79,7 @@ class CNN_Dynamic(nn.Module):
     def __init__(self, channel_num, kernel_sizes, strides, paddings, ac_funs, 
                  img_size, fc_sizes, fc_ac_funs):
         super().__init__()
-
+# Create conv layers
         conv_params = zip(channel_num, channel_num[1:], kernel_sizes, strides, 
                          paddings, ac_funs)
         conv_layers = \
@@ -88,7 +88,7 @@ class CNN_Dynamic(nn.Module):
             in conv_params]
         # print(conv_layers)
         self.conv = nn.Sequential(*conv_layers)
-        
+# Create fc layers
         fc_params = zip(fc_sizes, fc_sizes[1:], fc_ac_funs)
         fc_layers = \
             [fc_layer(in_size, out_size, ac_fun)

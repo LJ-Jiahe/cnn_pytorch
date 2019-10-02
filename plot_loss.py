@@ -8,7 +8,7 @@ import config as cfg
 from utils import read_from_pickle_file
 
 
-matplotlib.use('TKAgg')
+matplotlib.use('MacOSX')
 train_loss = []
 test_loss = []
 

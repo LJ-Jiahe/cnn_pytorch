@@ -68,7 +68,7 @@ for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
     for validation_ite, validation_datapoint in enumerate(tqdm(validation_loader, desc='Validation')):
         validation_input_batch = validation_datapoint[0].type(torch.FloatTensor)
         validation_target_batch = validation_datapoint[1].type(torch.FloatTensor)
-    
+     
         if torch.cuda.is_available():
             validation_input_batch = validation_input_batch.cuda()
             validation_target_batch = validation_target_batch.cuda()
@@ -80,10 +80,8 @@ for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
     validation_loss_avg = validation_loss_total / validation_loader.__len__()
     validation_loss_loc = os.path.join(cfg.loss_folder, 'validation_loss')
     append_to_pickle_file(validation_loss_loc, [epoch, validation_loss_avg])
-    
 
-    
-
+'''
     train_loss_total = 0
     for train_ite, train_datapoint in enumerate(tqdm(train_loader, desc='Train')):
         train_input_batch = train_datapoint[0].type(torch.FloatTensor)
@@ -104,6 +102,7 @@ for epoch in range(saved_epoch + 1, saved_epoch + 1 + cfg.training_epoch):
     train_loss_loc = os.path.join(cfg.loss_folder, 'train_loss')
     train_loss_avg = train_loss_total / train_loader.__len__()
     append_to_pickle_file(train_loss_loc, [epoch, train_loss_avg])
+'''
 
 # Print Loss
     time_since_start = (time.time()-start_time) / 60
